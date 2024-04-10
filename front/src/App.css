@@ -5,38 +5,91 @@
   text-align: center;
 }
 
-.logo {
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  padding: 20px;
+  width: 60vw;
+}
+
+.App-logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.App-logo:hover {
+  filter: drop-shadow(0 0 2em #faf628f1);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.App-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
+  width: 200px;
   padding: 2em;
+  margin: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em #0002;
+  background-color: #fff;
+  color: #333;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  transition: filter 300ms;
+}
+
+.male:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.female:hover {
+  filter: drop-shadow(0 0 2em #ff7ce9e7);
+}
+
+.card-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.button {
+  width: 150px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #333;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition-property: background-color, filter;
+  transition-duration: 300ms;
+}
+
+.button:hover {
+  background-color: #555;
+  filter: drop-shadow(0 0 2em #555);
+}
+
+.button:focus {
+  outline: none;
 }
