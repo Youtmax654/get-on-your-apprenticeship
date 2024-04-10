@@ -20,15 +20,15 @@ realRouter.get("/", function (req, res, next) {
 });
 
 realRouter.get("/students", function (req, res, next) {
-  fetchStudents().then((data: any) => {
-    res.json(data);
+  fetchStudents().then((students: any) => {
+    res.json(students);
   });
 });
 
 realRouter.get("/randomstudent", function (req, res, next) {
-  fetchStudents().then((data: any) => {
-    const randomIndex = Math.floor(Math.random() * data.length);
-    res.json(data[randomIndex]);
+  fetchStudents().then((students: any) => {
+    const randomIndex = Math.floor(Math.random() * students.length);
+    res.json(students[randomIndex]);
   });
 });
 
