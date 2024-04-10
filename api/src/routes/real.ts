@@ -2,6 +2,13 @@ import { Firestore } from "@google-cloud/firestore";
 import express from "express";
 const realRouter = express.Router();
 
+type House =
+  | "Gryffindor"
+  | "Hufflepuff"
+  | "Ravenclaw"
+  | "Slytherin"
+  | undefined;
+
 const db = new Firestore({
   projectId: "teolia-apprentice",
   keyFilename: "./src/keyfile.json",
@@ -9,9 +16,15 @@ const db = new Firestore({
 
 const studentsCollection = db.collection("students");
 
-const fetchStudents = async () => {
+const fetchStudents = async (house?: House) => {
   const students = await studentsCollection.get();
-  console.log(students.docs.map((student) => student.data()));
+
+  if (house) {
+    return students.docs
+      .map((student) => student.data())
+      .filter((student) => student.house === house);
+  }
+
   return students.docs.map((student) => student.data());
 };
 
@@ -20,7 +33,9 @@ realRouter.get("/", function (req, res, next) {
 });
 
 realRouter.get("/students", function (req, res, next) {
-  fetchStudents().then((students: any) => {
+  let house = req.query.house as House;
+
+  fetchStudents(house).then((students: any) => {
     res.json(students);
   });
 });

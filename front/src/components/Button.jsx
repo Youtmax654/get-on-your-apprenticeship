@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-export default function Button({ children, onClick }) {
+export default function Button({ children, onClick, className }) {
   return (
-    <button className="button" onClick={onClick}>
+    <button className={`button ${className}`} onClick={onClick}>
       {children}
     </button>
   );
@@ -11,4 +11,5 @@ export default function Button({ children, onClick }) {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
