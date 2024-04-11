@@ -1,6 +1,9 @@
 import { Firestore } from "@google-cloud/firestore";
+import dotenv from "dotenv";
 import express from "express";
 const realRouter = express.Router();
+
+dotenv.config();
 
 type House =
   | "Gryffindor"
@@ -11,7 +14,10 @@ type House =
 
 const db = new Firestore({
   projectId: "teolia-apprentice",
-  keyFilename: "./src/keyfile.json",
+  credentials: {
+    client_email: process.env.CLIENT_EMAIL,
+    private_key: process.env.PRIVATE_KEY,
+  },
 });
 
 const studentsCollection = db.collection("students");
