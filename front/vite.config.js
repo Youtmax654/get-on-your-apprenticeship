@@ -7,5 +7,14 @@ export default defineConfig({
   base: './',
   build: {
     outDir: '../docs',
-  }
+  },
+  preview: {
+    port: 8080,
+    strictPort: true,
+  },
+  server: {
+    port: 8080,
+    strictPort: true,
+    host: true,
+  },
 })
