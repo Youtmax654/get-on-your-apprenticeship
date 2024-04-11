@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "outDir": "functions",
+    "outDir": "netlify/functions/",
     "rootDir": "src",
     "esModuleInterop": true,
     "moduleResolution": "Node16",

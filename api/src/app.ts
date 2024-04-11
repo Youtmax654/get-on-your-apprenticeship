@@ -4,6 +4,7 @@ import express from "express";
 import createError from "http-errors";
 import logger from "morgan";
 import path from "path";
+import serverless from "serverless-http";
 
 import errorHandler from "./error-handler";
 import dummyRouter from "./routes/dummy";
@@ -30,5 +31,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(errorHandler);
+
+export const handler = serverless(app);
 
 export default app;
