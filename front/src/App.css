@@ -32,6 +32,8 @@
 .houses-filter {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 1em;
 }
 
@@ -81,10 +83,6 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 .button {
