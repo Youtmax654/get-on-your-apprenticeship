@@ -19,9 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/.netlify/functions/api/users", usersRouter);
-app.use("/.netlify/functions/api/dummy", dummyRouter);
-app.use("/.netlify/functions/api/real", realRouter);
+app.use("/users", usersRouter);
+app.use("/dummy", dummyRouter);
+app.use("/real", realRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

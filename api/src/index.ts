@@ -8,7 +8,7 @@ import debug from "debug";
 import app from "./app";
 debug("api:server");
 
-import serverless from "serverless-http";
+import http from "http";
 
 /**
  * Get port from environment and store in Express.
@@ -21,16 +21,15 @@ app.set("port", port);
  * Create HTTP server.
  */
 
-// export const server = serverless(app);
-module.exports.handler = serverless(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-// server.listen(port);
-// server.on("error", onError);
-// server.on("listening", onListening);
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -82,8 +81,8 @@ function onError(error: Error & { syscall: string; code: string }) {
  * Event listener for HTTP server "listening" event.
  */
 
-// function onListening() {
-//   const addr = server.address();
-//   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
-//   debug("Listening on " + bind);
-// }
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
+  debug("Listening on " + bind);
+}

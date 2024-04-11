@@ -1,16 +1,20 @@
 import PropTypes from "prop-types";
+import gryffindor from "../assets/houses/Gryffindor_ClearBG.webp";
+import hufflepuff from "../assets/houses/Hufflepuff_ClearBG.webp";
+import ravenclaw from "../assets/houses/RavenclawCrest.webp";
+import slytherin from "../assets/houses/Slytherin_ClearBG.webp";
 
 export default function Card({ student }) {
   const houseImage = () => {
     switch (student.house) {
       case "Gryffindor":
-        return "/src/assets/houses/Gryffindor_ClearBG.webp";
+        return gryffindor;
       case "Slytherin":
-        return "/src/assets/houses/Slytherin_ClearBG.webp";
+        return slytherin;
       case "Hufflepuff":
-        return "/src/assets/houses/Hufflepuff_ClearBG.webp";
+        return hufflepuff;
       case "Ravenclaw":
-        return "/src/assets/houses/RavenclawCrest.webp";
+        return ravenclaw;
 
       default:
         return "";
