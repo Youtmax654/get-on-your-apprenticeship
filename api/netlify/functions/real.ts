@@ -1,4 +1,5 @@
 import { Firestore } from "@google-cloud/firestore";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import serverless from "serverless-http";
@@ -7,6 +8,11 @@ const api = express();
 const realRouter = express.Router();
 
 dotenv.config();
+
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 
 type House =
   | "Gryffindor"
@@ -66,6 +72,7 @@ realRouter.get("/randomstudent", function (req, res, next) {
   });
 });
 
+api.use(cors(corsOptions));
 api.use("/real/", realRouter);
 
 export const handler = serverless(api);
