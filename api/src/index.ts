@@ -21,7 +21,8 @@ app.set("port", port);
  * Create HTTP server.
  */
 
-export const server = serverless(app);
+// export const server = serverless(app);
+module.exports.handler = serverless(app);
 
 /**
  * Listen on provided port, on all network interfaces.
