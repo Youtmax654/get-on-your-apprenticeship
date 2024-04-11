@@ -1,4 +1,5 @@
 import { Firestore } from "@google-cloud/firestore";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import serverless from "serverless-http";
@@ -66,6 +67,7 @@ realRouter.get("/randomstudent", function (req, res, next) {
   });
 });
 
+api.use(cors());
 api.use("/real/", realRouter);
 
 export const handler = serverless(api);
