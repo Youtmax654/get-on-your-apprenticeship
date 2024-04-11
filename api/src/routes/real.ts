@@ -16,16 +16,22 @@ const db = new Firestore({
 
 const studentsCollection = db.collection("students");
 
-const fetchStudents = async (house?: House) => {
-  const students = await studentsCollection.get();
+const fetchStudents = async (house?: House, page?: number) => {
+  let maxPage = undefined;
+  let students = (await studentsCollection.get()).docs.map((student) =>
+    student.data()
+  );
 
   if (house) {
-    return students.docs
-      .map((student) => student.data())
-      .filter((student) => student.house === house);
+    students = students.filter((student) => student.house === house);
   }
 
-  return students.docs.map((student) => student.data());
+  if (page) {
+    maxPage = Math.ceil(students.length / 8);
+    students = students.slice(((page || 1) - 1) * 8, (page || 1) * 8);
+  }
+
+  return { students: students, maxPage: maxPage };
 };
 
 realRouter.get("/", function (req, res, next) {
@@ -34,16 +40,24 @@ realRouter.get("/", function (req, res, next) {
 
 realRouter.get("/students", function (req, res, next) {
   let house = req.query.house as House;
+  let page = req.query.page as number | undefined;
 
-  fetchStudents(house).then((students: any) => {
-    res.json(students);
-  });
+  if (page && page < 1) {
+    res.status(400).json({ error: "Invalid page number" });
+    return;
+  }
+
+  fetchStudents(house, page).then(
+    ({ students, maxPage }: { students: any; maxPage: number | undefined }) => {
+      res.json({ students, maxPage });
+    }
+  );
 });
 
 realRouter.get("/randomstudent", function (req, res, next) {
-  fetchStudents().then((students: any) => {
-    const randomIndex = Math.floor(Math.random() * students.length);
-    res.json(students[randomIndex]);
+  fetchStudents().then((result: any) => {
+    const randomIndex = Math.floor(Math.random() * result.students.length);
+    res.json(result.students[randomIndex]);
   });
 });
 

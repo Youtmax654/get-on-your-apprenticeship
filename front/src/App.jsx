@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import SyncLoader from "react-spinners/SyncLoader";
 import "./App.css";
 import logo from "./assets/hogwarts.png";
@@ -8,65 +9,102 @@ import Card from "./components/Card";
 function App() {
   const [result, setResult] = useState(null);
   const [filter, setFilter] = useState(null);
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const housesFilter = [
     {
       name: "Gryffindor",
       img: "/src/assets/houses/Gryffindor_ClearBG.webp",
-      onClick: () => fetchStudents("Gryffindor"),
+      onClick: () => {
+        fetchStudents("Gryffindor", 1);
+        setPage(1);
+      },
     },
     {
       name: "Hufflepuff",
       img: "/src/assets/houses/Hufflepuff_ClearBG.webp",
-      onClick: () => fetchStudents("Hufflepuff"),
+      onClick: () => {
+        fetchStudents("Hufflepuff", 1);
+        setPage(1);
+      },
     },
     {
       name: "Ravenclaw",
       img: "/src/assets/houses/RavenclawCrest.webp",
-      onClick: () => fetchStudents("Ravenclaw"),
+      onClick: () => {
+        fetchStudents("Ravenclaw", 1);
+        setPage(1);
+      },
     },
     {
       name: "Slytherin",
       img: "/src/assets/houses/Slytherin_ClearBG.webp",
-      onClick: () => fetchStudents("Slytherin"),
+      onClick: () => {
+        fetchStudents("Slytherin", 1);
+        setPage(1);
+      },
     },
   ];
 
-  const fetchStudents = async (house) => {
+  const fetchStudents = async (house, page) => {
     setResult(null);
     setFilter(null);
+    // setPage(1);
 
     if (house) {
       const response = await fetch(
-        `http://localhost:3000/real/students?house=${house}`
+        `http://localhost:3000/real/students?page=${page}&house=${house}`
       );
       const data = await response.json();
-      setResult(data);
+      setResult(data.students);
+      setMaxPage(data.maxPage);
       setFilter(house);
       return;
     }
 
-    const response = await fetch("http://localhost:3000/real/students");
+    const response = await fetch(
+      `http://localhost:3000/real/students?page=${page}`
+    );
     const data = await response.json();
-    setResult(data);
+    setResult(data.students);
+    setMaxPage(data.maxPage);
   };
 
   const pickRandomStudent = async () => {
     setResult(null);
     setFilter(null);
+    setPage(1);
+    setMaxPage(1);
     const res = await fetch("http://localhost:3000/real/randomstudent");
     const data = await res.json();
     setResult([data]);
   };
 
   useEffect(() => {
-    fetchStudents();
+    fetchStudents(undefined, page);
   }, []);
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      fetchStudents(filter, page - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (page < maxPage) {
+      setPage(page + 1);
+      fetchStudents(filter, page + 1);
+    }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <Button onClick={() => fetchStudents()}>Show all students</Button>
+        <Button onClick={() => fetchStudents(undefined, 1)}>
+          Show all students
+        </Button>
         <img src={logo} className="App-logo" alt="logo" />
         <Button onClick={pickRandomStudent}>Pick a student randomly</Button>
       </header>
@@ -90,6 +128,11 @@ function App() {
         ) : (
           <SyncLoader color={"#ffffff"} loading={true} size={15} />
         )}
+      </div>
+      <div className="pages">
+        <MdArrowBackIosNew onClick={handlePreviousPage} />
+        {page} / {maxPage}
+        <MdArrowForwardIos onClick={handleNextPage} />
       </div>
     </div>
   );
