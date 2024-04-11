@@ -1,10 +1,11 @@
-import { Handler } from "@netlify/functions";
+import express, { Router } from "express";
+import serverless from "serverless-http";
 
-const handler: Handler = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Hello from real function!" }),
-  };
-};
+const api = express();
 
-export default handler;
+const router = Router();
+router.get("/", (req, res) => res.send("Hello World!"));
+
+api.use("/real", router);
+
+export const handler = serverless(api);
