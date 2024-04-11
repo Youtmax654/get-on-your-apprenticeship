@@ -59,7 +59,7 @@ function App() {
 
     if (house) {
       const response = await fetch(
-        `http://localhost:3000/real/students?page=${page}&house=${house}`
+        `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}&house=${house}`
       );
       const data = await response.json();
       setResult(data.students);
@@ -69,7 +69,7 @@ function App() {
     }
 
     const response = await fetch(
-      `http://localhost:3000/real/students?page=${page}`
+      `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}`
     );
     const data = await response.json();
     setResult(data.students);
@@ -81,7 +81,9 @@ function App() {
     setFilter(null);
     setPage(1);
     setMaxPage(1);
-    const res = await fetch("http://localhost:3000/real/randomstudent");
+    const res = await fetch(
+      "https://teolia-apprenticeship-api.netlify.app/real/randomstudent"
+    );
     const data = await res.json();
     setResult([data]);
   };
