@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import SyncLoader from "react-spinners/SyncLoader";
 import "./App.css";
-import logo from "./assets/hogwarts.png";
 import Button from "./components/Button";
 import Card from "./components/Card";
+
+import logo from "./assets/hogwarts.png";
+import gryffindor from "./assets/houses/Gryffindor_ClearBG.webp";
+import hufflepuff from "./assets/houses/Hufflepuff_ClearBG.webp";
+import ravenclaw from "./assets/houses/RavenclawCrest.webp";
+import slytherin from "./assets/houses/Slytherin_ClearBG.webp";
 
 function App() {
   const [result, setResult] = useState(null);
@@ -15,7 +20,7 @@ function App() {
   const housesFilter = [
     {
       name: "Gryffindor",
-      img: "/src/assets/houses/Gryffindor_ClearBG.webp",
+      img: gryffindor,
       onClick: () => {
         fetchStudents("Gryffindor", 1);
         setPage(1);
@@ -23,7 +28,7 @@ function App() {
     },
     {
       name: "Hufflepuff",
-      img: "/src/assets/houses/Hufflepuff_ClearBG.webp",
+      img: hufflepuff,
       onClick: () => {
         fetchStudents("Hufflepuff", 1);
         setPage(1);
@@ -31,7 +36,7 @@ function App() {
     },
     {
       name: "Ravenclaw",
-      img: "/src/assets/houses/RavenclawCrest.webp",
+      img: ravenclaw,
       onClick: () => {
         fetchStudents("Ravenclaw", 1);
         setPage(1);
@@ -39,7 +44,7 @@ function App() {
     },
     {
       name: "Slytherin",
-      img: "/src/assets/houses/Slytherin_ClearBG.webp",
+      img: slytherin,
       onClick: () => {
         fetchStudents("Slytherin", 1);
         setPage(1);
