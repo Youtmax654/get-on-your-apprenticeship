@@ -112,7 +112,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button onClick={() => fetchStudents(undefined, 1)}>
+        <Button
+          onClick={() => {
+            fetchStudents(undefined, 1);
+            setPage(1);
+          }}
+        >
           Show all students
         </Button>
         <img src={logo} className="App-logo" alt="logo" />
