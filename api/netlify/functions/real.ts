@@ -63,6 +63,7 @@ realRouter.get("/students", function (req, res, next) {
       res.set({
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
       });
       res.json({ students, maxPage });
     }
