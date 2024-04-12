@@ -58,6 +58,7 @@ function App() {
     // setPage(1);
 
     if (house) {
+      console.log("There's a house filter");
       const response = await fetch(
         `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}&house=${house}`,
         { mode: "no-cors" }
@@ -69,6 +70,7 @@ function App() {
       return;
     }
 
+    console.log("No house filter");
     const response = await fetch(
       `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}`,
       { mode: "no-cors" }

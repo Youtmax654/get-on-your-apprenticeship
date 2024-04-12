@@ -60,6 +60,10 @@ realRouter.get("/students", function (req, res, next) {
 
   fetchStudents(house, page).then(
     ({ students, maxPage }: { students: any; maxPage: number | undefined }) => {
+      res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      });
       res.json({ students, maxPage });
     }
   );
@@ -68,6 +72,10 @@ realRouter.get("/students", function (req, res, next) {
 realRouter.get("/randomstudent", function (req, res, next) {
   fetchStudents().then((result: any) => {
     const randomIndex = Math.floor(Math.random() * result.students.length);
+    res.set({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
     res.json(result.students[randomIndex]);
   });
 });
