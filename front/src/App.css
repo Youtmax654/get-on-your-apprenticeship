@@ -48,10 +48,11 @@
 
 .App-body {
   display: flex;
-  flex: 1;
+  height: 432px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .card {
