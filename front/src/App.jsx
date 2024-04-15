@@ -55,8 +55,6 @@ function App() {
   const fetchStudents = async (house, page) => {
     setResult(null);
     setFilter(null);
-    // setPage(1);
-
     if (house) {
       console.log("There's a house filter");
       const response = await fetch(
@@ -68,7 +66,6 @@ function App() {
       setFilter(house);
       return;
     }
-
     console.log("No house filter");
     const response = await fetch(
       `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}`
