@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
-import SyncLoader from "react-spinners/SyncLoader";
-import "./App.css";
-import Button from "./components/Button";
-import Card from "./components/Card";
+import { useEffect, useState } from 'react';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import SyncLoader from 'react-spinners/SyncLoader';
+import './App.css';
+import Button from './components/Button';
+import Card from './components/Card';
 
-import logo from "./assets/hogwarts.png";
-import gryffindor from "./assets/houses/Gryffindor_ClearBG.webp";
-import hufflepuff from "./assets/houses/Hufflepuff_ClearBG.webp";
-import ravenclaw from "./assets/houses/RavenclawCrest.webp";
-import slytherin from "./assets/houses/Slytherin_ClearBG.webp";
+import logo from './assets/hogwarts.png';
+import gryffindor from './assets/houses/Gryffindor_ClearBG.webp';
+import hufflepuff from './assets/houses/Hufflepuff_ClearBG.webp';
+import ravenclaw from './assets/houses/RavenclawCrest.webp';
+import slytherin from './assets/houses/Slytherin_ClearBG.webp';
 
 function App() {
   const [result, setResult] = useState(null);
@@ -19,34 +19,34 @@ function App() {
 
   const housesFilter = [
     {
-      name: "Gryffindor",
+      name: 'Gryffindor',
       img: gryffindor,
       onClick: () => {
-        fetchStudents("Gryffindor", 1);
+        fetchStudents('Gryffindor', 1);
         setPage(1);
       },
     },
     {
-      name: "Hufflepuff",
+      name: 'Hufflepuff',
       img: hufflepuff,
       onClick: () => {
-        fetchStudents("Hufflepuff", 1);
+        fetchStudents('Hufflepuff', 1);
         setPage(1);
       },
     },
     {
-      name: "Ravenclaw",
+      name: 'Ravenclaw',
       img: ravenclaw,
       onClick: () => {
-        fetchStudents("Ravenclaw", 1);
+        fetchStudents('Ravenclaw', 1);
         setPage(1);
       },
     },
     {
-      name: "Slytherin",
+      name: 'Slytherin',
       img: slytherin,
       onClick: () => {
-        fetchStudents("Slytherin", 1);
+        fetchStudents('Slytherin', 1);
         setPage(1);
       },
     },
@@ -58,7 +58,7 @@ function App() {
     if (house) {
       console.log("There's a house filter");
       const response = await fetch(
-        `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}&house=${house}`
+        `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}&house=${house}`,
       );
       const data = await response.json();
       setResult(data.students);
@@ -66,9 +66,9 @@ function App() {
       setFilter(house);
       return;
     }
-    console.log("No house filter");
+    console.log('No house filter');
     const response = await fetch(
-      `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}`
+      `https://teolia-apprenticeship-api.netlify.app/real/students?page=${page}`,
     );
     const data = await response.json();
     setResult(data.students);
@@ -80,9 +80,7 @@ function App() {
     setFilter(null);
     setPage(1);
     setMaxPage(1);
-    const res = await fetch(
-      "https://teolia-apprenticeship-api.netlify.app/real/randomstudent"
-    );
+    const res = await fetch('https://teolia-apprenticeship-api.netlify.app/real/randomstudent');
     const data = await res.json();
     setResult([data]);
   };
@@ -124,7 +122,7 @@ function App() {
           <Button
             key={house.name}
             onClick={house.onClick}
-            className={filter === house.name && "selected"}
+            className={filter === house.name && 'selected'}
           >
             <img src={house.img} alt={house.name} width={20} />
             {house.name}
@@ -133,11 +131,9 @@ function App() {
       </div>
       <div className="App-body">
         {result ? (
-          result.map((student) => (
-            <Card key={crypto.randomUUID()} student={student} />
-          ))
+          result.map((student) => <Card key={crypto.randomUUID()} student={student} />)
         ) : (
-          <SyncLoader color={"#ffffff"} loading={true} size={15} />
+          <SyncLoader color={'#ffffff'} loading={true} size={15} />
         )}
       </div>
       <div className="pages">

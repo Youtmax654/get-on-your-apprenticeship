@@ -1,32 +1,32 @@
-import PropTypes from "prop-types";
-import gryffindor from "../assets/houses/Gryffindor_ClearBG.webp";
-import hufflepuff from "../assets/houses/Hufflepuff_ClearBG.webp";
-import ravenclaw from "../assets/houses/RavenclawCrest.webp";
-import slytherin from "../assets/houses/Slytherin_ClearBG.webp";
+import PropTypes from 'prop-types';
+import gryffindor from '../assets/houses/Gryffindor_ClearBG.webp';
+import hufflepuff from '../assets/houses/Hufflepuff_ClearBG.webp';
+import ravenclaw from '../assets/houses/RavenclawCrest.webp';
+import slytherin from '../assets/houses/Slytherin_ClearBG.webp';
 
 export default function Card({ student }) {
   const houseImage = () => {
     switch (student.house) {
-      case "Gryffindor":
+      case 'Gryffindor':
         return gryffindor;
-      case "Slytherin":
+      case 'Slytherin':
         return slytherin;
-      case "Hufflepuff":
+      case 'Hufflepuff':
         return hufflepuff;
-      case "Ravenclaw":
+      case 'Ravenclaw':
         return ravenclaw;
 
       default:
-        return "";
+        return '';
     }
   };
 
   const genderImage = () => {
     switch (student.gender) {
-      case "male":
-        return "https://icons.iconarchive.com/icons/custom-icon-design/flatastic-7/512/Male-icon.png";
-      case "female":
-        return "https://icons.iconarchive.com/icons/custom-icon-design/flatastic-7/512/Female-icon.png";
+      case 'male':
+        return 'https://icons.iconarchive.com/icons/custom-icon-design/flatastic-7/512/Male-icon.png';
+      case 'female':
+        return 'https://icons.iconarchive.com/icons/custom-icon-design/flatastic-7/512/Female-icon.png';
     }
   };
 
@@ -40,11 +40,7 @@ export default function Card({ student }) {
         <img src={houseImage()} alt={student.house} width={30} />
         {student.house}
       </div>
-      {student.alternate_names.length > 0 ? (
-        <div>Alias: {student.alternate_names[0]}</div>
-      ) : (
-        ""
-      )}
+      {student.alternate_names.length > 0 ? <div>Alias: {student.alternate_names[0]}</div> : ''}
     </div>
   );
 }
