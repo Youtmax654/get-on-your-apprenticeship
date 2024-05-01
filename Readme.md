@@ -177,6 +177,16 @@ Le gain ? En dockerisant ton application, tu seras capable de la distribuer trè
 
 > Si tu veux en savoir plus sur Docker: https://www.docker.com/get-started
 
+> Pour lancer le container pour l'API (http://localhost:3000) :
+> ```
+> docker run -p 3000:3000 youtmax/teolia-apprenticeship-api
+> ```
+
+> Pour lancer le container pour le front (fonctionne sans l'API) :
+>```
+> docker run -p 8080:8080 youtmax/teolia-apprenticeship-front
+>```
+
 #### :fire::fire: [DEVOPS/CLOUD] Déploie le front sur Github pages
 Un front dispo pour toi sur ton ordi, c'est bien. Mais le rendre disponible à tous les apprentis sorciers qui voudraient savoir qui sera à Poudlard cette année, c'est mieux !
 
